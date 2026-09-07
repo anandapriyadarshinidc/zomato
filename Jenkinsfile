@@ -49,9 +49,9 @@ pipeline {
 
         APPZ_ARTIFACTS = 'D:/Deploy'
 
-        QUIZZ_PROJECT = 'C:\Users\ananda.dc\Desktop\zomato\zomato'
+        QUIZZ_PROJECT = 'C:/Users/ananda.dc/Desktop/zomato/zomato'
 
-        QUIZZ_BIN = 'C:\Users\ananda.dc\Desktop\zomato\zomato\bin'
+        QUIZZ_BIN = 'C:/Users/ananda.dc/Desktop/zomato/zomato/bin'
 
         // ============================================================
         // DATABASE
