@@ -1038,62 +1038,55 @@ pipeline {
         // 11. OPEN APPZILLON
         // ============================================================
 
-        stage('Open Appzillon') {
+               stage('Open Appzillon') {
+                   steps {
+                       bat '''
+                           @echo off
 
-            steps {
+                           echo ==========================================
+                           echo Opening Appzillon Application
+                           echo ==========================================
 
-                bat '''
-                    @echo off
+                           echo Appzillon URL:
+                           echo %APPZILLON_URL%
 
-                    echo Appzillon URL:
-                    echo %APPZILLON_URL%
+                           start "" "%APPZILLON_URL%"
 
-                    start "" "%APPZILLON_URL%"
+                           echo Browser launch requested.
 
-                    echo Browser launch requested.
+                           ping 127.0.0.1 -n 5 >nul
+                       '''
+                   }
+               }
 
-                    ping 127.0.0.1 -n 5 >nul
-                '''
-            }
-        }
+           }
 
+           post {
 
-        // ================================================================
-        // POST ACTIONS
-        // ================================================================
+               success {
+                   echo '=========================================='
+                   echo 'Jenkins Pipeline Completed Successfully'
+                   echo '=========================================='
 
-        post {
+                   echo 'Backend URL:'
+                   echo '%BACKEND_URL%'
 
-            success {
+                   echo 'Appzillon URL:'
+                   echo '%APPZILLON_URL%'
+               }
 
-                echo '=========================================='
-                echo 'ZOMATO APP DEPLOYMENT SUCCESSFUL'
-                echo '=========================================='
+               failure {
+                   echo '=========================================='
+                   echo 'Jenkins Pipeline Failed'
+                   echo '=========================================='
 
-                echo 'Backend: http://localhost:9091'
+                   echo 'Please check the Jenkins console output.'
+               }
 
-                echo 'Backend API: http://localhost:9091/admin/restaurants'
-
-                echo 'Appzillon: http://localhost:8090/zomato/'
-
-                echo '=========================================='
-            }
-
-
-            failure {
-
-                echo '=========================================='
-                echo 'ZOMATO APP DEPLOYMENT FAILED'
-                echo '=========================================='
-
-                echo 'Check the failed Jenkins stage.'
-
-                echo 'Backend log: backend.log'
-
-                echo 'Tomcat logs: D:/apache-tomcat-9.0.53/apache-tomcat-9.0.53/logs'
-
-                echo '=========================================='
-            }
-        }
-    }
-}
+               always {
+                   echo '=========================================='
+                   echo 'Pipeline Execution Finished'
+                   echo '=========================================='
+               }
+           }
+       }
