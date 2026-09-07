@@ -1042,10 +1042,6 @@ pipeline {
 
             steps {
 
-                echo '=========================================='
-                echo 'OPENING APPZILLON'
-                echo '=========================================='
-
                 bat '''
                     @echo off
 
@@ -1058,43 +1054,46 @@ pipeline {
 
                     ping 127.0.0.1 -n 5 >nul
                 '''
-
-
-    // ================================================================
-    // POST ACTIONS
-    // ================================================================
-
-    post {
-
-        success {
-
-            echo '=========================================='
-            echo 'QUIZ APP DEPLOYMENT SUCCESSFUL'
-            echo '=========================================='
-
-            echo 'Backend: http://localhost:8080'
-
-            echo 'Backend API: http://localhost:8080/api/categories'
-
-            echo 'Appzillon: http://localhost:9090/quizzz'
-
-            echo '=========================================='
+            }
         }
 
 
-        failure {
+        // ================================================================
+        // POST ACTIONS
+        // ================================================================
 
-            echo '=========================================='
-            echo 'QUIZ APP DEPLOYMENT FAILED'
-            echo '=========================================='
+        post {
 
-            echo 'Check the failed Jenkins stage.'
+            success {
 
-            echo 'Backend log: backend.log'
+                echo '=========================================='
+                echo 'ZOMATO APP DEPLOYMENT SUCCESSFUL'
+                echo '=========================================='
 
-            echo 'Tomcat logs: D:/apache-tomcat-9.0.53-windows-x64/apache-tomcat-9.0.53/logs'
+                echo 'Backend: http://localhost:9091'
 
-            echo '=========================================='
+                echo 'Backend API: http://localhost:9091/admin/restaurants'
+
+                echo 'Appzillon: http://localhost:8090/zomato/'
+
+                echo '=========================================='
+            }
+
+
+            failure {
+
+                echo '=========================================='
+                echo 'ZOMATO APP DEPLOYMENT FAILED'
+                echo '=========================================='
+
+                echo 'Check the failed Jenkins stage.'
+
+                echo 'Backend log: backend.log'
+
+                echo 'Tomcat logs: D:/apache-tomcat-9.0.53/apache-tomcat-9.0.53/logs'
+
+                echo '=========================================='
+            }
         }
     }
 }
