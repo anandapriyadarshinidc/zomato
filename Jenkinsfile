@@ -26,7 +26,7 @@ pipeline {
         // SPRING BOOT BACKEND
         // ============================================================
 
-        APP_JAR = 'zomato-backend.jar'
+        APP_JAR = 'target/zomato-backend.jar'
 
         BACKEND_PORT = '9091'
 
